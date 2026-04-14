@@ -1,0 +1,525 @@
+/* ========================================
+   Design Tokens
+   ======================================== */
+:root {
+  /* Colors */
+  --bg-primary: #0a0a0f;
+  --bg-calculator: rgba(18, 18, 28, 0.85);
+  --bg-display: rgba(10, 10, 18, 0.9);
+  --bg-number: rgba(255, 255, 255, 0.06);
+  --bg-number-hover: rgba(255, 255, 255, 0.12);
+  --bg-function: rgba(138, 132, 255, 0.12);
+  --bg-function-hover: rgba(138, 132, 255, 0.22);
+  --bg-operator: rgba(99, 102, 241, 0.2);
+  --bg-operator-hover: rgba(99, 102, 241, 0.35);
+  --bg-equals: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+  --bg-equals-hover: linear-gradient(135deg, #7c7ff7 0%, #9d6ff8 50%, #b89dfc 100%);
+  --bg-sci: rgba(56, 189, 248, 0.1);
+  --bg-sci-hover: rgba(56, 189, 248, 0.2);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: rgba(241, 245, 249, 0.5);
+  --text-accent: #a78bfa;
+  --text-operator: #818cf8;
+  --text-sci: #38bdf8;
+  --text-function: #c4b5fd;
+
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(99, 102, 241, 0.3);
+
+  --shadow-calculator: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 120px rgba(99, 102, 241, 0.08);
+  --shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-btn-active: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-equals: 0 4px 20px rgba(99, 102, 241, 0.4);
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-display: clamp(2rem, 6vw, 3rem);
+  --font-size-history: clamp(0.8rem, 2vw, 0.95rem);
+  --font-size-btn: clamp(1.1rem, 3vw, 1.3rem);
+  --font-size-btn-sci: clamp(0.8rem, 2vw, 0.9rem);
+
+  /* Spacing */
+  --gap-buttons: 10px;
+  --padding-calc: clamp(16px, 3vw, 24px);
+  --radius-calc: 28px;
+  --radius-btn: 16px;
+  --radius-display: 18px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ========================================
+   Reset & Base
+   ======================================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ========================================
+   Background Effects
+   ======================================== */
+.background-effects {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  animation: float 20s infinite ease-in-out;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #6366f1, transparent 70%);
+  top: -15%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #8b5cf6, transparent 70%);
+  bottom: -20%;
+  right: -10%;
+  animation-delay: -7s;
+}
+
+.orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #38bdf8, transparent 70%);
+  top: 50%;
+  left: 60%;
+  animation-delay: -14s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(30px, -40px) scale(1.05); }
+  50%      { transform: translate(-20px, 20px) scale(0.95); }
+  75%      { transform: translate(15px, 35px) scale(1.02); }
+}
+
+/* ========================================
+   Container
+   ======================================== */
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ========================================
+   Calculator Shell
+   ======================================== */
+.calculator {
+  width: 100%;
+  background: var(--bg-calculator);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-calc);
+  padding: var(--padding-calc);
+  backdrop-filter: blur(40px) saturate(1.5);
+  -webkit-backdrop-filter: blur(40px) saturate(1.5);
+  box-shadow: var(--shadow-calculator);
+  animation: fadeInUp 0.6s var(--transition-normal);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ========================================
+   Header
+   ======================================== */
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.calc-logo {
+  font-size: 1.3rem;
+}
+
+.calc-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Mode Toggle */
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.mode-toggle.active .toggle-label {
+  color: var(--text-sci);
+}
+
+.toggle-track {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.mode-toggle.active .toggle-track {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.toggle-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform var(--transition-spring), background var(--transition-fast);
+}
+
+.mode-toggle.active .toggle-thumb {
+  transform: translateX(16px);
+  background: var(--text-sci);
+}
+
+/* ========================================
+   Display
+   ======================================== */
+.display {
+  background: var(--bg-display);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-display);
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+  position: relative;
+}
+
+.display::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.display-history {
+  font-size: var(--font-size-history);
+  color: var(--text-secondary);
+  font-weight: 400;
+  min-height: 1.4em;
+  text-align: right;
+  width: 100%;
+  word-break: break-all;
+  transition: opacity var(--transition-fast);
+}
+
+.display-current {
+  font-size: var(--font-size-display);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-align: right;
+  width: 100%;
+  word-break: break-all;
+  line-height: 1.2;
+  transition: transform var(--transition-spring);
+}
+
+.display-current.pulse {
+  animation: displayPulse 0.15s ease-out;
+}
+
+@keyframes displayPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* ========================================
+   Scientific Panel
+   ======================================== */
+.scientific-panel {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease,
+              margin 0.3s ease;
+  margin-bottom: 0;
+}
+
+.scientific-panel.open {
+  max-height: 200px;
+  opacity: 1;
+  margin-bottom: 12px;
+}
+
+/* ========================================
+   Button Grid
+   ======================================== */
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-buttons);
+}
+
+/* ========================================
+   Buttons — Base
+   ======================================== */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-family);
+  font-size: var(--font-size-btn);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition-fast),
+              transform var(--transition-spring),
+              box-shadow var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.btn:active {
+  transform: scale(0.92);
+}
+
+.btn:active::after {
+  opacity: 1;
+}
+
+/* Number buttons */
+.btn-number {
+  background: var(--bg-number);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.btn-number:hover {
+  background: var(--bg-number-hover);
+}
+
+/* Wide button (0) */
+.btn-wide {
+  grid-column: span 2;
+  aspect-ratio: unset;
+  border-radius: var(--radius-btn);
+}
+
+/* Function buttons */
+.btn-function {
+  background: var(--bg-function);
+  color: var(--text-function);
+  border: 1px solid rgba(138, 132, 255, 0.08);
+}
+
+.btn-function:hover {
+  background: var(--bg-function-hover);
+}
+
+/* Operator buttons */
+.btn-operator {
+  background: var(--bg-operator);
+  color: var(--text-operator);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  font-size: 1.4rem;
+}
+
+.btn-operator:hover {
+  background: var(--bg-operator-hover);
+}
+
+.btn-operator.active {
+  background: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Equals button */
+.btn-equals {
+  background: var(--bg-equals);
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-equals);
+}
+
+.btn-equals:hover {
+  background: var(--bg-equals-hover);
+  box-shadow: 0 6px 28px rgba(99, 102, 241, 0.5);
+}
+
+/* Scientific buttons */
+.btn-sci {
+  background: var(--bg-sci);
+  color: var(--text-sci);
+  border: 1px solid rgba(56, 189, 248, 0.08);
+  font-size: var(--font-size-btn-sci);
+  font-weight: 600;
+  aspect-ratio: unset;
+  padding: 10px 4px;
+  letter-spacing: 0.02em;
+}
+
+.btn-sci:hover {
+  background: var(--bg-sci-hover);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+.footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+}
+
+.heart {
+  color: #f472b6;
+  display: inline-block;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15%      { transform: scale(1.25); }
+  30%      { transform: scale(1); }
+  45%      { transform: scale(1.15); }
+  60%      { transform: scale(1); }
+}
+
+/* ========================================
+   Keyboard Focus Styles
+   ======================================== */
+.btn:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 400px) {
+  .calculator {
+    border-radius: 22px;
+    padding: 14px;
+  }
+
+  .display {
+    padding: 16px 18px;
+    min-height: 90px;
+    border-radius: 14px;
+  }
+
+  .btn {
+    border-radius: 12px;
+  }
+
+  :root {
+    --gap-buttons: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn:active {
+    transform: scale(0.95) translateY(0);
+  }
+}

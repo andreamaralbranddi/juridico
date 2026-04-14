@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculadora online moderna com design premium. Realize cálculos rapidamente com uma interface elegante e responsiva.">
+  <title>Calculadora | Jurido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-effects">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <main class="container">
+    <div class="calculator" id="calculator">
+      <!-- Header -->
+      <div class="calc-header">
+        <span class="calc-logo">⚡</span>
+        <span class="calc-title">Calculadora</span>
+        <div class="mode-toggle" id="mode-toggle" title="Alternar modo científico">
+          <span class="toggle-label">SCI</span>
+          <div class="toggle-track">
+            <div class="toggle-thumb"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Display -->
+      <div class="display" id="display">
+        <div class="display-history" id="display-history"></div>
+        <div class="display-current" id="display-current">0</div>
+      </div>
+
+      <!-- Scientific buttons (hidden by default) -->
+      <div class="scientific-panel" id="scientific-panel">
+        <button class="btn btn-sci" data-action="sin" id="btn-sin">sin</button>
+        <button class="btn btn-sci" data-action="cos" id="btn-cos">cos</button>
+        <button class="btn btn-sci" data-action="tan" id="btn-tan">tan</button>
+        <button class="btn btn-sci" data-action="log" id="btn-log">log</button>
+        <button class="btn btn-sci" data-action="ln" id="btn-ln">ln</button>
+        <button class="btn btn-sci" data-action="sqrt" id="btn-sqrt">√</button>
+        <button class="btn btn-sci" data-action="pow" id="btn-pow">x²</button>
+        <button class="btn btn-sci" data-action="pi" id="btn-pi">π</button>
+        <button class="btn btn-sci" data-action="euler" id="btn-euler">e</button>
+        <button class="btn btn-sci" data-action="factorial" id="btn-factorial">x!</button>
+      </div>
+
+      <!-- Main button grid -->
+      <div class="buttons-grid">
+        <button class="btn btn-function" data-action="clear" id="btn-clear">AC</button>
+        <button class="btn btn-function" data-action="backspace" id="btn-backspace">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/>
+            <line x1="18" y1="9" x2="12" y2="15"/>
+            <line x1="12" y1="9" x2="18" y2="15"/>
+          </svg>
+        </button>
+        <button class="btn btn-function" data-action="percent" id="btn-percent">%</button>
+        <button class="btn btn-operator" data-action="divide" id="btn-divide">÷</button>
+
+        <button class="btn btn-number" data-action="7" id="btn-7">7</button>
+        <button class="btn btn-number" data-action="8" id="btn-8">8</button>
+        <button class="btn btn-number" data-action="9" id="btn-9">9</button>
+        <button class="btn btn-operator" data-action="multiply" id="btn-multiply">×</button>
+
+        <button class="btn btn-number" data-action="4" id="btn-4">4</button>
+        <button class="btn btn-number" data-action="5" id="btn-5">5</button>
+        <button class="btn btn-number" data-action="6" id="btn-6">6</button>
+        <button class="btn btn-operator" data-action="subtract" id="btn-subtract">−</button>
+
+        <button class="btn btn-number" data-action="1" id="btn-1">1</button>
+        <button class="btn btn-number" data-action="2" id="btn-2">2</button>
+        <button class="btn btn-number" data-action="3" id="btn-3">3</button>
+        <button class="btn btn-operator" data-action="add" id="btn-add">+</button>
+
+        <button class="btn btn-number btn-wide" data-action="0" id="btn-0">0</button>
+        <button class="btn btn-number" data-action="decimal" id="btn-decimal">,</button>
+        <button class="btn btn-equals" data-action="equals" id="btn-equals">=</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>Feito com <span class="heart">♥</span> — Jurido</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
