@@ -2,35 +2,35 @@
    Design Tokens
    ======================================== */
 :root {
-  /* Colors */
-  --bg-primary: #0a0a0f;
-  --bg-calculator: rgba(18, 18, 28, 0.85);
-  --bg-display: rgba(10, 10, 18, 0.9);
-  --bg-number: rgba(255, 255, 255, 0.06);
-  --bg-number-hover: rgba(255, 255, 255, 0.12);
-  --bg-function: rgba(138, 132, 255, 0.12);
-  --bg-function-hover: rgba(138, 132, 255, 0.22);
-  --bg-operator: rgba(99, 102, 241, 0.2);
-  --bg-operator-hover: rgba(99, 102, 241, 0.35);
+  /* Colors — Light / White theme */
+  --bg-primary: #f0f2f5;
+  --bg-calculator: #ffffff;
+  --bg-display: #f7f8fa;
+  --bg-number: #f0f1f3;
+  --bg-number-hover: #e4e5e9;
+  --bg-function: #e8e9ed;
+  --bg-function-hover: #dcdde2;
+  --bg-operator: rgba(99, 102, 241, 0.12);
+  --bg-operator-hover: rgba(99, 102, 241, 0.22);
   --bg-equals: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
   --bg-equals-hover: linear-gradient(135deg, #7c7ff7 0%, #9d6ff8 50%, #b89dfc 100%);
-  --bg-sci: rgba(56, 189, 248, 0.1);
-  --bg-sci-hover: rgba(56, 189, 248, 0.2);
+  --bg-sci: rgba(56, 189, 248, 0.08);
+  --bg-sci-hover: rgba(56, 189, 248, 0.16);
 
-  --text-primary: #f1f5f9;
-  --text-secondary: rgba(241, 245, 249, 0.5);
-  --text-accent: #a78bfa;
-  --text-operator: #818cf8;
-  --text-sci: #38bdf8;
-  --text-function: #c4b5fd;
+  --text-primary: #1a1a2e;
+  --text-secondary: #8b8fa3;
+  --text-accent: #6366f1;
+  --text-operator: #6366f1;
+  --text-sci: #0891b2;
+  --text-function: #64648b;
 
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(99, 102, 241, 0.3);
+  --border-glass: rgba(0, 0, 0, 0.06);
+  --border-glow: rgba(99, 102, 241, 0.2);
 
-  --shadow-calculator: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 120px rgba(99, 102, 241, 0.08);
-  --shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-btn-active: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-  --shadow-equals: 0 4px 20px rgba(99, 102, 241, 0.4);
+  --shadow-calculator: 0 20px 60px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-btn: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-btn-active: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-equals: 0 4px 16px rgba(99, 102, 241, 0.35);
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -95,7 +95,7 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.35;
+  opacity: 0.15;
   animation: float 20s infinite ease-in-out;
 }
 
@@ -157,8 +157,8 @@ body {
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-calc);
   padding: var(--padding-calc);
-  backdrop-filter: blur(40px) saturate(1.5);
-  -webkit-backdrop-filter: blur(40px) saturate(1.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--shadow-calculator);
   animation: fadeInUp 0.6s var(--transition-normal);
 }
@@ -222,8 +222,8 @@ body {
   width: 36px;
   height: 20px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
   transition: background var(--transition-fast), border-color var(--transition-fast);
 }
@@ -272,7 +272,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 60%);
+  background: none;
   pointer-events: none;
 }
 
@@ -368,7 +368,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.06) 0%, transparent 70%);
   opacity: 0;
   transition: opacity var(--transition-fast);
 }
@@ -385,7 +385,7 @@ body {
 .btn-number {
   background: var(--bg-number);
   color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .btn-number:hover {
@@ -403,7 +403,7 @@ body {
 .btn-function {
   background: var(--bg-function);
   color: var(--text-function);
-  border: 1px solid rgba(138, 132, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .btn-function:hover {
@@ -414,7 +414,7 @@ body {
 .btn-operator {
   background: var(--bg-operator);
   color: var(--text-operator);
-  border: 1px solid rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.08);
   font-size: 1.4rem;
 }
 
@@ -423,8 +423,8 @@ body {
 }
 
 .btn-operator.active {
-  background: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+  background: rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
 }
 
 /* Equals button */
@@ -446,7 +446,7 @@ body {
 .btn-sci {
   background: var(--bg-sci);
   color: var(--text-sci);
-  border: 1px solid rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.06);
   font-size: var(--font-size-btn-sci);
   font-weight: 600;
   aspect-ratio: unset;
