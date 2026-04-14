@@ -197,56 +197,29 @@ body {
   color: var(--text-secondary);
 }
 
-/* Mode Toggle */
-.mode-toggle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.toggle-label {
+/* Mode Button */
+.mode-btn {
+  font-family: var(--font-family);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--text-secondary);
-  transition: color var(--transition-fast);
+  background: none;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
 }
 
-.mode-toggle.active .toggle-label {
-  color: var(--text-sci);
+.mode-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
-.toggle-track {
-  width: 36px;
-  height: 20px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  position: relative;
-  transition: background var(--transition-fast), border-color var(--transition-fast);
-}
-
-.mode-toggle.active .toggle-track {
-  background: rgba(56, 189, 248, 0.25);
-  border-color: rgba(56, 189, 248, 0.4);
-}
-
-.toggle-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--text-secondary);
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  transition: transform var(--transition-spring), background var(--transition-fast);
-}
-
-.mode-toggle.active .toggle-thumb {
-  transform: translateX(16px);
-  background: var(--text-sci);
+.mode-btn.active {
+  color: var(--text-accent);
+  background: rgba(99, 102, 241, 0.08);
+  border-color: rgba(99, 102, 241, 0.2);
 }
 
 /* ========================================
